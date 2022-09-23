@@ -1,10 +1,10 @@
 body {
-  font-family: “Verdana, Arial, sans-serif”;
+  font-family: Verdana, Arial, sans-serif;
 }
 
 td {
   padding: 6px;
-  border-bottom: 1 pixel wide solid gray;
+  border-bottom: 1px solid gray;
 }
 
 th {
