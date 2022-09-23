@@ -14,18 +14,34 @@ async function getData() {
   //console.log(dataJSON2.dataset.value)
   let index = 0
   for (let key in dataJSON1.dataset.dimension.Alue.category.label) {
+    // Municipality
     let tr = document.createElement("tr")
     let td = document.createElement("td")
     td.innerText = dataJSON1.dataset.dimension.Alue.category.label[key]
     tr.appendChild(td)
 
+    // Population
     let td2 = document.createElement("td")
     td2.innerText = dataJSON1.dataset.value[index]
     tr.appendChild(td2)
 
+    // Employment
     let td3 = document.createElement("td")
     td3.innerText = dataJSON2.dataset.value[index]
     tr.appendChild(td3)
+
+    // Employment-%
+    let td4 = document.createElement("td")
+    td4.innerText = (dataJSON2.dataset.value[index] / dataJSON1.dataset.value[index] * 100 ).toFixed(2)
+    // The rows with over 45% employment should have a background color of “#abffbd”
+    if (td4.innerText > 45) {
+      tr.style.backgroundColor = "#abffbd"
+    }
+    // The rows with under 25% employment should have a background color of “#ff9e9e”
+    if (td4.innerText < 25) {
+      tr.style.backgroundColor = "#ff9e9e"
+    }
+    tr.appendChild(td4)
 
     dataTable.appendChild(tr)
     index += 1

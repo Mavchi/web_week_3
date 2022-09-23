@@ -210,7 +210,7 @@ function getData() {
 
 function _getData() {
   _getData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var url1, url2, dataPromise1, dataJSON1, dataPromise2, dataJSON2, index, key, tr, td, td2, td3;
+    var url1, url2, dataPromise1, dataJSON1, dataPromise2, dataJSON2, index, key, tr, td, td2, td3, td4;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -241,16 +241,33 @@ function _getData() {
             index = 0;
 
             for (key in dataJSON1.dataset.dimension.Alue.category.label) {
+              // Municipality
               tr = document.createElement("tr");
               td = document.createElement("td");
               td.innerText = dataJSON1.dataset.dimension.Alue.category.label[key];
-              tr.appendChild(td);
+              tr.appendChild(td); // Population
+
               td2 = document.createElement("td");
               td2.innerText = dataJSON1.dataset.value[index];
-              tr.appendChild(td2);
+              tr.appendChild(td2); // Employment
+
               td3 = document.createElement("td");
               td3.innerText = dataJSON2.dataset.value[index];
-              tr.appendChild(td3);
+              tr.appendChild(td3); // Employment-%
+
+              td4 = document.createElement("td");
+              td4.innerText = (dataJSON2.dataset.value[index] / dataJSON1.dataset.value[index] * 100).toFixed(2); // The rows with over 45% employment should have a background color of “#abffbd”
+
+              if (td4.innerText > 45) {
+                tr.style.backgroundColor = "#abffbd";
+              } // The rows with under 25% employment should have a background color of “#ff9e9e”
+
+
+              if (td4.innerText < 25) {
+                tr.style.backgroundColor = "#ff9e9e";
+              }
+
+              tr.appendChild(td4);
               dataTable.appendChild(tr);
               index += 1; //console.log(dataJSON1.dataset.dimension.Alue.category.label[key])
             }
