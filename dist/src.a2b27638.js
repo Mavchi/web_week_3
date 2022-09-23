@@ -210,45 +210,59 @@ function getData() {
 
 function _getData() {
   _getData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var url1, dataPromise, dataJSON, index, key, tr, td, td2;
+    var url1, url2, dataPromise1, dataJSON1, dataPromise2, dataJSON2, index, key, tr, td, td2, td3;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             url1 = "https://statfin.stat.fi/PxWeb/sq/4e244893-7761-4c4f-8e55-7a8d41d86eff";
-            _context.next = 3;
+            url2 = "https://statfin.stat.fi/PxWeb/sq/5e288b40-f8c8-4f1e-b3b0-61b86ce5c065";
+            _context.next = 4;
             return fetch(url1);
 
-          case 3:
-            dataPromise = _context.sent;
-            _context.next = 6;
-            return dataPromise.json();
+          case 4:
+            dataPromise1 = _context.sent;
+            _context.next = 7;
+            return dataPromise1.json();
 
-          case 6:
-            dataJSON = _context.sent;
-            //console.log(dataJSON.dataset.dimension.Alue.category.label)
+          case 7:
+            dataJSON1 = _context.sent;
+            _context.next = 10;
+            return fetch(url2);
+
+          case 10:
+            dataPromise2 = _context.sent;
+            _context.next = 13;
+            return dataPromise2.json();
+
+          case 13:
+            dataJSON2 = _context.sent;
+            //console.log(dataJSON2.dataset.value)
             index = 0;
 
-            for (key in dataJSON.dataset.dimension.Alue.category.label) {
+            for (key in dataJSON1.dataset.dimension.Alue.category.label) {
               tr = document.createElement("tr");
               td = document.createElement("td");
-              td.innerText = dataJSON.dataset.dimension.Alue.category.label[key];
+              td.innerText = dataJSON1.dataset.dimension.Alue.category.label[key];
               tr.appendChild(td);
               td2 = document.createElement("td");
-              td2.innerText = dataJSON.dataset.value[index];
+              td2.innerText = dataJSON1.dataset.value[index];
               tr.appendChild(td2);
+              td3 = document.createElement("td");
+              td3.innerText = dataJSON2.dataset.value[index];
+              tr.appendChild(td3);
               dataTable.appendChild(tr);
-              index += 1; //console.log(dataJSON.dataset.dimension.Alue.category.label[key])
+              index += 1; //console.log(dataJSON1.dataset.dimension.Alue.category.label[key])
             }
             /*
-            dataJSON.dataset.dimension.Alue.category.label.forEach( (country, index) => {
+            dataJSON1.dataset.dimension.Alue.category.label.forEach( (country, index) => {
               console.log(country)
-              console.log(dataJSON.dataset.value[index])
+              console.log(dataJSON1.dataset.value[index])
             })
             */
 
 
-          case 9:
+          case 16:
           case "end":
             return _context.stop();
         }
